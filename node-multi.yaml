@@ -131,6 +131,7 @@ parameters:
 
   app_git_url:
     type: string
+    default: ''
 
   app_git_revision:
     type: string
@@ -138,6 +139,7 @@ parameters:
 
   app_git_deploy_key:
     type: string
+    default: ''
 
   kitchen:
     description: URL for the kitchen to use
