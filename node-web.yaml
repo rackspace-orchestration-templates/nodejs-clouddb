@@ -4,7 +4,7 @@ description: |
   Heat template to deploy a single Node.js server
 
 parameters:
-  server_hostname:
+  hostname:
     label: Server Name
     description: Server Name
     type: string
@@ -93,9 +93,26 @@ parameters:
     type: string
     default: https://raw.github.com/brint/nodejs-multi/master/node-web.yaml
 
+  stack_id:
+    type: string
+    default: node
+
 resources:
+  nodestack_node:
+    type: "Rackspace::Cloud::Server"
+    properties:
+      name: { get_param: hostname }
+      flavor: { get_param: flavor }
+      image: { get_param: image }
+      key_name: { get_param: ssh_key_name }
+      metadata:
+        rax-heat: { get_param: stack_id }
+
 
 outputs:
-  private_key:
-    description: SSH Private Key
-    value: { get_attr: [ssh_key, private_key] }
+  public_ip:
+    description: NodeJS node public IP
+    value: { get_attr: [nodestack_node, accessIPv4] }
+  private_ip: 
+    description: NodeJS node prive IP
+    value: { get_attr: [nodestack_node, privateIPv4] }
