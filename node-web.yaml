@@ -69,12 +69,12 @@ parameters:
         Must be a valid Rackspace Cloud Server flavor for the region you have
         selected to deploy into.
 
-  ssh_keypair_name:
+  ssh_key_name:
     description: Nova keypair name for ssh access to the server
     type: string
     default: nodejs-app
 
-  private_key:
+  ssh_private_key:
     description: Private SSH key
     type: string
     default: false
@@ -96,9 +96,6 @@ parameters:
   stack_id:
     type: string
     default: node
-
-  ssh_private_key:
-    type: string
 
 #  app_git_url:
 #    type: string
