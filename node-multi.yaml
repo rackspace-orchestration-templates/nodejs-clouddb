@@ -275,7 +275,7 @@ outputs:
 
   database_server_ip:
     description: Database Server IP
-    value: { get_attr: [database_server_setup, accessIPv4] }
+    value: { get_attr: [database_server, accessIPv4] }
 
   mysql_root_password:
     description: MySQL Root Password
