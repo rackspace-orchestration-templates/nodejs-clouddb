@@ -225,6 +225,13 @@ resources:
       kitchen: { get_param: kitchen }
       chef_version: { get_param: chef_version }
       node:
+        hollandbackup:
+          main:
+            backup_directory: "/var/lib/mysqlbackup"
+            mysqldump:
+              user: "root"
+              host: "localhost"
+              password: { get_attr: [mysql_root_password, value] }
         mysql:
           server_root_password: { get_attr: [db_admin_password, value] }
           server_repl_password: { get_attr: [mysql_repl_password, value] }
@@ -234,7 +241,12 @@ resources:
         build-essential:
           compile_time: true
         run_list: ["recipe[apt]",
-                   "recipe[mysql::server]"]
+                   "recipe[mysql::server]",
+                   "recipe[hollandbackup]",
+                   "recipe[hollandbackup::mysqldump]",
+                   "recipe[hollandbackup::main]",
+                   "recipe[hollandbackup::backupsets]",
+                   "recipe[hollandbackup::cron]"]
 
   nodejs_app_servers:
     type: "OS::Heat::ResourceGroup"
