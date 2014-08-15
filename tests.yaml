@@ -13,7 +13,7 @@ test-cases:
           env:
             user: root
             key_filename: tmp/private_key
-            hosts: { get_output: server_public_ips } # Fetch from output-list of stack
+            hosts: { get_output: node_server_ips } # Fetch from output-list of stack
             tasks:
               - check
             abort_on_prompts: True
@@ -21,3 +21,18 @@ test-cases:
             disable_known_hosts: True
             use_ssh_config: True
             fabfile: test/fabric/nodejsmulti.py # Path to envassert test
+    - database_server:
+        fabric:
+          # Fabric environment settings to use while running envassert script
+          # http://docs.fabfile.org/en/latest/usage/env.html
+          env:
+            user: root
+            key_filename: tmp/private_key
+            hosts: { get_output: database_server_ip } # Fetch from output-list of stack
+            tasks:
+              - mysql
+            abort_on_prompts: True
+            connection_attempts: 3
+            disable_known_hosts: True
+            use_ssh_config: True
+            fabfile: test/fabric/database.py # Path to envassert test
