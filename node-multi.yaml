@@ -257,6 +257,22 @@ resources:
           database_user_password: { get_resource: database_user_password }
 
 outputs:
+  load_balancer_ip:
+    description: Load Balancer IP
+    value: { get_attr: [load_balancer, PublicIp] }
+
+  database_server_ip:
+    description: Database Server IP
+    value: { get_attr: [database_server_setup, accessIPv4] }
+
+  mysql_root_password:
+    description: MySQL Root Password
+    value: { get_attr: [db_admin_password, value] }
+
+  node_server_ips:
+    description: Node.js Server IPs
+    value: { get_attr: [nodejs_app_servers, private_ip] }
+
   private_key:
     description: SSH Private Key
     value: { get_attr: [ssh_key, private_key] }
