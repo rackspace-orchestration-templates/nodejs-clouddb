@@ -129,6 +129,16 @@ parameters:
         Must be a valid Rackspace Cloud Server flavor for the region you have
         selected to deploy into.
 
+  app_git_url:
+    type: string
+
+  app_git_revision:
+    type: string
+    default: master
+
+  app_git_deploy_key:
+    type: string
+
   kitchen:
     description: URL for the kitchen to use
     type: string
