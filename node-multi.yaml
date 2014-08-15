@@ -231,7 +231,7 @@ resources:
             mysqldump:
               user: "root"
               host: "localhost"
-              password: { get_attr: [mysql_root_password, value] }
+              password: { get_attr: [db_admin_password, value] }
         mysql:
           server_root_password: { get_attr: [db_admin_password, value] }
           server_repl_password: { get_attr: [mysql_repl_password, value] }
