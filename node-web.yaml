@@ -100,15 +100,15 @@ parameters:
   ssh_private_key:
     type: string
 
-  app_git_url:
-    type: string
-
+#  app_git_url:
+#    type: string
+#
 #  app_git_revision:
 #    type: string
 #    default: master
-
-  app_git_deploy_key:
-    type: string
+#
+#  app_git_deploy_key:
+#    type: string
 
   db_server_ip:
     type: string
