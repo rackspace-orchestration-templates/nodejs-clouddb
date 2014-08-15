@@ -105,12 +105,17 @@ parameters:
 
   app_git_revision:
     type: string
+    default: master
+
   app_git_deploy_key:
     type: string
+
   db_server_ip:
     type: string
+
   database_username:
     type: string
+
   database_user_password:
     type: string
 
