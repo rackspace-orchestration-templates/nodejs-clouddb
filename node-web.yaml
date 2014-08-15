@@ -119,7 +119,7 @@ parameters:
 
 resources:
   nodestack_node:
-    type: "Rackspace::Cloud::Server"
+    type: 'Rackspace::Cloud::Server'
     properties:
       name: { get_param: hostname }
       flavor: { get_param: flavor }
@@ -128,6 +128,17 @@ resources:
       metadata:
         rax-heat: { get_param: stack_id }
 
+  nodestack_chef_run:
+    type: 'OS::Heat::ChefSolo'
+    depends_on: nodestack_node
+    properties:
+      username: root
+      private_key: { get_attr: [ssh_key_name, ssh_private_key] }
+      host: { get_attr: [nodestack_node, accessIPv4] }
+      kitchen: { get_param: kitchen }
+      chef_version: { get_param: chef_version }
+      node:
+        run_list: ["recipe[apt]", "recipe[nodejs]"]
 
 outputs:
   public_ip:
