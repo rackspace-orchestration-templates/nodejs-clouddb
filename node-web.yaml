@@ -93,21 +93,46 @@ parameters:
     type: string
     default: https://raw.github.com/brint/nodejs-multi/master/node-web.yaml
 
+  revision:
+    label: Revision
+    description: |
+      Optional: Git Branch/Ref to deploy. Default: HEAD
+    type: string
+    default: HEAD
+
+  packages:
+    label: System Packages
+    description: |
+      Optional: Additional system packages to install. For a list of available
+      packages, see: http://packages.ubuntu.com/precise/allpackages
+    type: string
+    default: ''
+
+  repo:
+    label: Git Repository
+    description: |
+      Optional: URL to your git repository. Use the https:// syntax for public
+      repositories, use git@ syntax for private repositories.
+    type: string
+    default: ''
+
+  deploy_key:
+    label: Git Deploy Key
+    description: |
+      Optional: If you specified a private repository, provide your private
+      deploy key here.
+    type: string
+    default: ''
+
+  destination:
+    label: Site Path
+    description: Path to setup your application on your servers.
+    default: /var/www/vhosts/application
+    type: string
+
   stack_id:
     type: string
     default: node
-
-  app_git_url:
-    type: string
-    default: ''
-
-  app_git_revision:
-    type: string
-    default: master
-
-  app_git_deploy_key:
-    type: string
-    default: ''
 
   db_server_ip:
     type: string
@@ -143,6 +168,12 @@ resources:
       kitchen: { get_param: kitchen }
       chef_version: { get_param: chef_version }
       node:
+        nodejs_app:
+          packages: { get_param: packages }
+          git_repo: { get_param: repo }
+          rev: { get_param: revision }
+          deploy_key: { get_param: deploy_key }
+          destination: { get_param: destination }
         rax:
           firewall:
             tcp: [22, 80]

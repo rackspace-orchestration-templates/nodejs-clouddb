@@ -3,6 +3,27 @@ heat_template_version: 2013-05-23
 description: |
   Heat template to deploy a multi-server Node.js deployment
 
+- label: Server Settings
+  parameters:
+  - image
+  - flavor
+
+- label: Node.js Application Settings
+  parameters:
+  - revision
+  - packages
+  - repo
+  - deploy_key
+
+- label: rax-dev-params
+  parameters:
+  - destination
+  - child_template
+  - load_balancer_hostname
+  - server_hostnames
+  - kitchen
+  - chef_version
+
 parameters:
   server_hostnames:
     label: Server Name
@@ -129,17 +150,42 @@ parameters:
         Must be a valid Rackspace Cloud Server flavor for the region you have
         selected to deploy into.
 
-  app_git_url:
+  revision:
+    label: Revision
+    description: |
+      Optional: Git Branch/Ref to deploy. Default: HEAD
+    type: string
+    default: HEAD
+
+  packages:
+    label: System Packages
+    description: |
+      Optional: Additional system packages to install. For a list of available
+      packages, see: http://packages.ubuntu.com/precise/allpackages
     type: string
     default: ''
 
-  app_git_revision:
-    type: string
-    default: master
-
-  app_git_deploy_key:
+  repo:
+    label: Git Repository
+    description: |
+      Optional: URL to your git repository. Use the https:// syntax for public
+      repositories, use git@ syntax for private repositories.
     type: string
     default: ''
+
+  deploy_key:
+    label: Git Deploy Key
+    description: |
+      Optional: If you specified a private repository, provide your private
+      deploy key here.
+    type: string
+    default: ''
+
+  destination:
+    label: Site Path
+    description: Path to setup your application on your servers.
+    default: /var/www/vhosts/application
+    type: string
 
   kitchen:
     description: URL for the kitchen to use
@@ -272,9 +318,11 @@ resources:
           ssh_private_key: { get_attr: [ssh_key, private_key] }
           kitchen: { get_param: kitchen }
           chef_version: { get_param: chef_version }
-          app_git_url: { get_param: app_git_url }
-          app_git_revision: { get_param: app_git_revision }
-          app_git_deploy_key: { get_param: app_git_deploy_key }
+          revision: { get_param: revision }
+          packages: { get_param: packages }
+          repo: { get_param: repo }
+          deploy_key: { get_param: deploy_key }
+          destination: { get_param: destination }
           db_server_ip: { get_attr: [database_server, privateIPv4] }
           database_username: { get_param: database_username }
           database_user_password: { get_resource: database_user_password }
