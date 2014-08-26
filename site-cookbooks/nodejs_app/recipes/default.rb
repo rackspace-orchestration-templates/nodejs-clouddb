@@ -14,7 +14,7 @@ end
 
 node.set['authorization']['sudo']['users'] = ["#{node['nodejs_app']['username']}"]
 
-databag = Chef::EncryptedDataBagItem.load(node['deployment']['id'], node['deployment']['app_id'])
+databag = Chef::EncryptedDataBagItem.load(node['deployment']['app_id'], node['deployment']['id'])
 node.set['nodejs_app']['password'] = databag['nodejs_app']['password']
 node.set['nodejs_app']['deploy_key'] = databag['nodejs_app']['deploy_key']
 
