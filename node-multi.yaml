@@ -240,13 +240,17 @@ resources:
           remove_anonymous_users: true
         build-essential:
           compile_time: true
+        rax:
+          firewall:
+            tcp: [22, 3306]
         run_list: ["recipe[apt]",
                    "recipe[mysql::server]",
                    "recipe[hollandbackup]",
                    "recipe[hollandbackup::mysqldump]",
                    "recipe[hollandbackup::main]",
                    "recipe[hollandbackup::backupsets]",
-                   "recipe[hollandbackup::cron]"]
+                   "recipe[hollandbackup::cron]",
+                   "recipe[rax-firewall]"]
 
   nodejs_app_servers:
     type: "OS::Heat::ResourceGroup"

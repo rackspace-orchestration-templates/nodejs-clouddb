@@ -143,7 +143,12 @@ resources:
       kitchen: { get_param: kitchen }
       chef_version: { get_param: chef_version }
       node:
-        run_list: ["recipe[apt]", "recipe[nodejs]"]
+        rax:
+          firewall:
+            tcp: [22, 3306]
+        run_list: ["recipe[apt]",
+                   "recipe[nodejs]",
+                   "recipe[rax-firewall]"]
 
 outputs:
   public_ip:
