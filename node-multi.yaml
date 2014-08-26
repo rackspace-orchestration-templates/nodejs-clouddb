@@ -172,6 +172,13 @@ resources:
         port: 80
         condition: ENABLED
       port: 80
+      healthMonitor:
+        type: HTTP
+        delay: 10
+        timeout: 5
+        attemptsBeforeDeactivation: 2
+        path: /
+        statusRegex: ^[2345]0[0-9]$
       protocol: HTTP
       algorithm: ROUND_ROBIN
       contentCaching: DISABLED
