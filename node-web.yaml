@@ -146,11 +146,21 @@ resources:
         rax:
           firewall:
             tcp: [22, 80]
+        deployment:
+          id: { get_param: stack_id }
+          app_id: nodejs
         run_list: ["recipe[apt]",
                    "recipe[nodejs]",
                    "recipe[ssh_known_hosts]",
                    "recipe[nodejs_app]",
                    "recipe[rax-firewall]"]
+      data_bags:
+        nodejs:
+          encrypted: true
+          id: { get_param: stack_id }
+          nodejs_app:
+            password: $6$e1XUjq/A$rxzBgMeqYiU0oI0ic1.8yz4b8B.6ojvImFEb0MnZ2SVLflg2UVeDJuf/dkxQkPPDgS/MhUFeiJ8uRptb4gwiX1
+            deploy_key: ''
 
 outputs:
   public_ip:
