@@ -46,9 +46,9 @@ end
 include_recipe "nodejs"
 
 if node["nodejs_app"]["git_repo"]
-  include_recipe "nodejs_cookbook::nodejs_deploy"
+  include_recipe "nodejs_app::nodejs_deploy"
 else
-  include_recipe "nodejs_cookbook::nodejs_stack"
+  include_recipe "nodejs_app::nodejs_stack"
 end
 
-include_recipe "nodejs_cookbook::firewall"
+include_recipe "nodejs_app::firewall"
