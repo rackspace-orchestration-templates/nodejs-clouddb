@@ -7,3 +7,5 @@ cookbook 'hollandbackup',
   :git => 'https://github.com/brint/hollandbackup'
 cookbook 'rax-firewall',
   :git => 'https://github.com/brint/rax-firewall-cookbook'
+cookbook 'nodejs_app',
+  :path => 'site-cookbooks/nodejs_app'
