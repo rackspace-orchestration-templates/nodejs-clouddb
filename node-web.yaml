@@ -145,7 +145,7 @@ resources:
       node:
         rax:
           firewall:
-            tcp: [22, 3306]
+            tcp: [22, 80]
         run_list: ["recipe[apt]",
                    "recipe[nodejs]",
                    "recipe[ssh_known_hosts]",
