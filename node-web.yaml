@@ -163,10 +163,10 @@ resources:
             deploy_key: ''
 
 outputs:
-  public_ip:
-    description: NodeJS node public IP
+  accessIPv4:
+    description: Node.js node public IP
     value: { get_attr: [nodestack_node, accessIPv4] }
 
-  private_ip:
+  privateIPv4:
     description: NodeJS node prive IP
     value: { get_attr: [nodestack_node, privateIPv4] }
