@@ -284,6 +284,14 @@ outputs:
     description: Load Balancer IP
     value: { get_attr: [load_balancer, PublicIp] }
 
+  nodejs_url:
+    description: "Node.js URL"
+    value:
+      str_replace:
+        template: "http://%ip%"
+        params:
+          "%ip%": { get_attr: [load_balancer, PublicIp] }
+
   database_server_ip:
     description: Database Server IP
     value: { get_attr: [database_server, accessIPv4] }
@@ -294,7 +302,7 @@ outputs:
 
   node_server_ips:
     description: Node.js Server IPs
-    value: { get_attr: [nodejs_app_servers, private_ip] }
+    value: { get_attr: [nodejs_app_servers, accessIPv4] }
 
   private_key:
     description: SSH Private Key
