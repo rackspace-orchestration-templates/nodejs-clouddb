@@ -3,6 +3,7 @@ heat_template_version: 2013-05-23
 description: |
   Heat template to deploy a multi-server Node.js deployment
 
+parameter_groups:
 - label: Server Settings
   parameters:
   - image
