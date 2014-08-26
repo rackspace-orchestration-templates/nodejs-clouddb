@@ -1,4 +1,4 @@
-name             'nodejs_cookbook'
+name             'nodejs_app'
 maintainer       'Jon Perritt'
 maintainer_email 'jon.perritt@rackspace.com'
 license          'Apache License, Version 2.0'

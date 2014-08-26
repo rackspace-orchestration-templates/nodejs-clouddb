@@ -148,6 +148,8 @@ resources:
             tcp: [22, 3306]
         run_list: ["recipe[apt]",
                    "recipe[nodejs]",
+                   "recipe[ssh_known_hosts]",
+                   "recipe[nodejs_app]",
                    "recipe[rax-firewall]"]
 
 outputs:
