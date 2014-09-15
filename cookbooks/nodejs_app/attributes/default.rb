@@ -12,7 +12,7 @@ default['nodejs_app']['https_port'] = '443'
 default['nodejs_app']['sslcert'] = nil
 default['nodejs_app']['sslkey'] = nil
 default['nodejs_app']['sslcacert'] = nil
-#A comma separated string of packages
+# A comma separated string of packages
 default['nodejs_app']['packages'] = ''
 
 include_attribute 'sudo::default'

@@ -21,6 +21,8 @@ class Chef
       attribute :service_name, :kind_of => String, :name_attribute => true
       attribute :template_source, :kind_of => String, :default => nil
       attribute :version, :kind_of => String, :default => nil
+      attribute :package_version, :kind_of => String, :default => nil
+      attribute :package_action, :kind_of => String, :default => nil
     end
 
     include Opscode::Mysql::Helpers
@@ -31,7 +33,15 @@ class Chef
 
     def parsed_data_dir
       return data_dir if data_dir
-      default_data_dir_for(node['platform_family'])
+      case node['platform_family']
+      when 'rhel', 'fedora', 'suse', 'debian', 'omnios'
+        data_dir = '/var/lib/mysql'
+      when 'smartos'
+        data_dir = '/opt/local/lib/mysql'
+      when 'freebsd'
+        data_dir = '/var/db/mysql'
+      end
+      data_dir
     end
 
     def parsed_package_name
@@ -42,6 +52,14 @@ class Chef
         node['platform_version'],
         parsed_version
         )
+    end
+
+    def parsed_package_version
+      return package_version if package_version
+    end
+
+    def parsed_package_action
+      return package_action if package_action
     end
 
     def parsed_port
@@ -82,11 +100,37 @@ class Chef
 
     def parsed_version
       return version if version
-      default_version_for(
-        node['platform'],
-        node['platform_family'],
-        node['platform_version']
-        )
+      case node['platform_family']
+      when 'rhel'
+        case node['platform_version'].to_i
+        when 5
+          default_version = '5.0'
+        when 2013, 6
+          default_version = '5.1'
+        when 2014, 7
+          default_version = '5.5'
+        end
+      when 'fedora'
+        default_version = '5.5'
+      when 'suse'
+        default_version = '5.5'
+      when 'debian'
+        return '5.1' if node['platform_version'].to_i == 6
+        return '5.5' if node['platform_version'].to_i == 7
+        case node['platform_version']
+        when 'jessie/sid', '12.04', '13.04', '13.10', '14.04'
+          default_version = '5.5'
+        when '10.04'
+          default_version = '5.1'
+        end
+      when 'smartos'
+        default_version = '5.5'
+      when 'omnios'
+        default_version = '5.5'
+      when 'freebsd'
+        default_version = '5.5'
+      end
+      default_version
     end
   end
 end

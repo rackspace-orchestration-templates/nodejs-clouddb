@@ -1,54 +1,55 @@
 # recipes/default.rb
 
-include_recipe "apt"
-include_recipe "yum"
-include_recipe "build-essential"
-include_recipe "sudo"
-
 case node['platform_family']
-when "rhel", "fedora"
-  include_recipe "yum"
+when 'rhel', 'fedora'
+  include_recipe 'yum'
 else
-  include_recipe "apt"
+  include_recipe 'apt'
 end
 
-node.set['authorization']['sudo']['users'] = ["#{node['nodejs_app']['username']}"]
+include_recipe 'build-essential'
+include_recipe 'sudo'
 
-databag = Chef::EncryptedDataBagItem.load(node['deployment']['id'], node['deployment']['app_id'])
+node.set['authorization']['sudo']['users'] = [node['nodejs_app']['username']]
+
+databag = Chef::EncryptedDataBagItem.load(node['deployment']['app_id'],
+                                          node['deployment']['id'])
 node.set['nodejs_app']['password'] = databag['nodejs_app']['password']
 node.set['nodejs_app']['deploy_key'] = databag['nodejs_app']['deploy_key']
 
-appUser = node['nodejs_app']['username']
-appDir = node['nodejs_app']['destination']
-homeDir = "/home/#{appUser}"
+app_user = node['nodejs_app']['username']
+app_dir = node['nodejs_app']['destination']
+home_dir = "/home/#{app_user}"
 
-user appUser do
+user app_user do
   password node['nodejs_app']['password']
-  supports :manage_home => true
-  shell "/bin/bash"
-  home homeDir
+  supports manage_home: true
+  shell '/bin/bash'
+  home home_dir
 end
 
-directory appDir do
-  owner appUser
-  mode "755"
+directory app_dir do
+  owner app_user
+  mode 755
   recursive true
 end
 
-bash "create Node directories" do
-  user appUser
+bash 'create Node directories' do
+  user app_user
   code <<-EOH
-    sudo mkdir -p /usr/local/{share/man,bin,lib/node,include/node,lib/node_modules}
-    sudo chown -R #{appUser} /usr/local/{share/man,bin,lib/node,include/node,lib/node_modules}
+    sudo mkdir -p \
+    /usr/local/{share/man,bin,lib/node,include/node,lib/node_modules}
+    sudo chown -R #{app_user} \
+    /usr/local/{share/man,bin,lib/node,include/node,lib/node_modules}
   EOH
 end
 
-include_recipe "nodejs"
+include_recipe 'nodejs'
 
-if node["nodejs_app"]["git_repo"]
-  include_recipe "nodejs_cookbook::nodejs_deploy"
+if node['nodejs_app']['git_repo']
+  include_recipe 'nodejs_app::nodejs_deploy'
 else
-  include_recipe "nodejs_cookbook::nodejs_stack"
+  include_recipe 'nodejs_app::nodejs_stack'
 end
 
-include_recipe "nodejs_cookbook::firewall"
+include_recipe 'nodejs_app::firewall'
