@@ -19,7 +19,7 @@ node.set['nodejs_app']['deploy_key'] = databag['nodejs_app']['deploy_key']
 
 app_user = node['nodejs_app']['username']
 app_dir = node['nodejs_app']['destination']
-home_dir = "/home/#{app_user}"
+home_dir = File.join('/home', app_user)
 
 user app_user do
   password node['nodejs_app']['password']
