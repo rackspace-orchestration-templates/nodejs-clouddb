@@ -33,16 +33,13 @@ end
   end
 end
 
-http_port = node['nodejs_app']['http_port']
-start_app_cmd = "forever start server.js --http_port #{http_port}"
-
-if node['nodejs_app']['http_port'].to_i <= 1024
-  start_app_cmd = 'sudo ' + start_app_cmd
+template '/etc/init.d/node-app' do
+  source 'init.erb'
+  owner 'root'
+  group 'root'
+  mode 0755
 end
 
-execute 'run app' do
-  cwd node['nodejs_app']['destination']
-  command start_app_cmd
-  user node['nodejs_app']['username']
-  environment ({ 'HOME' => home_dir })
+service 'node-app' do
+  action [:enable, :start]
 end
