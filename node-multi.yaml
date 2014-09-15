@@ -299,6 +299,7 @@ resources:
             tcp: [22, 3306]
         run_list: ["recipe[apt]",
                    "recipe[mysql::server]",
+                   "recipe[dotmy-cnf]",
                    "recipe[hollandbackup]",
                    "recipe[hollandbackup::mysqldump]",
                    "recipe[hollandbackup::main]",
