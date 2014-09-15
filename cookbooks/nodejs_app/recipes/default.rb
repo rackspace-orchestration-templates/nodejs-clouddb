@@ -46,10 +46,10 @@ end
 
 include_recipe 'nodejs'
 
-if node['nodejs_app']['git_repo']
-  include_recipe 'nodejs_app::nodejs_deploy'
-else
+if node['nodejs_app']['git_repo'].empty? || !node['nodejs_app']['git_repo']
   include_recipe 'nodejs_app::nodejs_stack'
+else
+  include_recipe 'nodejs_app::nodejs_deploy'
 end
 
 include_recipe 'nodejs_app::firewall'
