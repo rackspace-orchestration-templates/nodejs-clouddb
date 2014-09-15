@@ -3,7 +3,7 @@ var express = require('express'),
     app = express(),
     argv = require('optimist').argv;
 
-var http_port = parseInt(argv.http_port);
+// var http_port = parseInt(argv.http_port);
 
 // enables compression for all requests
 var compression = require('compression')
@@ -19,4 +19,5 @@ app.get('/hello', function(req, res){
   res.send('Hello <%= @appUser %>!');
 });
 
-app.listen(http_port);
+// app.listen(http_port);
+app.listen(<%= node['node_app']['http_port'] %>);
