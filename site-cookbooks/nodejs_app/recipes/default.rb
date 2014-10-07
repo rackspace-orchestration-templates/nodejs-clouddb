@@ -20,6 +20,7 @@ node.set['nodejs_app']['deploy_key'] = databag['nodejs_app']['deploy_key']
 app_user = node['nodejs_app']['username']
 app_dir = node['nodejs_app']['destination']
 home_dir = File.join('/home', app_user)
+forever_dir = File.join(home_dir, '.forever')
 
 user app_user do
   password node['nodejs_app']['password']
@@ -28,11 +29,14 @@ user app_user do
   home home_dir
 end
 
-directory app_dir do
-  owner app_user
-  mode 0755
-  recursive true
+[app_dir, forever_dir, File.join(forever_dir, 'pids')].each do |dir|
+  directory dir do
+    owner app_user
+    mode 0755
+    recursive true
+  end
 end
+
 
 bash 'create Node directories' do
   user app_user
