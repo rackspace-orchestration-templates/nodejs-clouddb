@@ -16,7 +16,7 @@ end_key = '-----END RSA PRIVATE KEY-----'
 
 key = node['nodejs_app']['deploy_key']
 if key
-  key = key.gsub(begin_key, '').gsub(end_key, '').gsub(' ', '\n')
+  key = key.gsub(begin_key, '').gsub(end_key, '').gsub(/\s+/, '\n')
   git_deploy_key = begin_key + key + end_key
 end
 
