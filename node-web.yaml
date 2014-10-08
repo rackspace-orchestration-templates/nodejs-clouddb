@@ -201,7 +201,7 @@ resources:
             deploy_key: ''
             database_url:
               str_replace:
-                template: 'mysql://%dbuser%:%dbpasswd%@%dbhostname'
+                template: 'mysql://%dbuser%:%dbpasswd%@%dbhostname%'
                 params:
                   '%dbuser%': { get_param: database_username }
                   '%dbpasswd%': { get_param: database_user_password }
