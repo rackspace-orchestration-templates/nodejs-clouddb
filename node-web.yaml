@@ -185,13 +185,6 @@ resources:
                    "recipe[ssh_known_hosts]",
                    "recipe[nodejs_app]",
                    "recipe[rax-firewall]"]
-        database_url:
-          str_replace:
-            template: 'mysql://%dbuser%:%dbpasswd%@%dbhostname%'
-            params:
-              '%dbuser%': { get_param: database_username }
-              '%dbpasswd%': { get_param: database_user_password }
-              '%dbhostname%': { get_param: db_server_ip }
       data_bags:
         nodejs:
           encrypted: true

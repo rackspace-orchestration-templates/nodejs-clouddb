@@ -31,7 +31,7 @@ end
 
 file File.join(secrets_dir, "#{node['nodejs_app']['appName']}_db_url.txt") do
   mode 0660
-  content databag['nodejs_app']['database_url']
+  content "#{databag['nodejs_app']['database_url']}\n"
 end
 
 user app_user do
