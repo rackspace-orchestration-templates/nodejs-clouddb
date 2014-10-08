@@ -185,6 +185,13 @@ resources:
                    "recipe[ssh_known_hosts]",
                    "recipe[nodejs_app]",
                    "recipe[rax-firewall]"]
+        database_url:
+          str_replace:
+            template: 'mysql://%dbuser%:%dbpasswd%@%dbhostname%'
+            params:
+              '%dbuser%': { get_param: database_username }
+              '%dbpasswd%': { get_param: database_user_password }
+              '%dbhostname%': { get_param: db_server_ip }
       data_bags:
         nodejs:
           encrypted: true
@@ -192,6 +199,13 @@ resources:
           nodejs_app:
             password: $6$e1XUjq/A$rxzBgMeqYiU0oI0ic1.8yz4b8B.6ojvImFEb0MnZ2SVLflg2UVeDJuf/dkxQkPPDgS/MhUFeiJ8uRptb4gwiX1
             deploy_key: ''
+            database_url:
+              str_replace:
+                template: 'mysql://%dbuser%:%dbpasswd%@%dbhostname'
+                params:
+                  '%dbuser%': { get_param: database_username }
+                  '%dbpasswd%': { get_param: database_user_password }
+                  '%dbhostname%': { get_param: db_server_ip }
 
 outputs:
   accessIPv4:

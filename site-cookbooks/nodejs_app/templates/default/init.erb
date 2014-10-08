@@ -90,7 +90,7 @@ start() {
     #
     # Note that redirecting the output to /dev/null (or anywhere) is necessary
     # to make this script work if provisioning the service via Chef.
-    forever \
+    DATABASE_URL=$(< /etc/configs/${NAME}_db_url.txt) forever \
       --pidFile $PIDFILE \
       -a \
       -l $LOGFILE \
