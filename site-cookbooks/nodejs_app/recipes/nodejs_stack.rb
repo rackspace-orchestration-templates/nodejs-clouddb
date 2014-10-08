@@ -38,6 +38,7 @@ template '/etc/init.d/node-app' do
   owner 'root'
   group 'root'
   mode 0755
+  variables destination: node['nodejs_app']['destination']
 end
 
 service 'node-app' do

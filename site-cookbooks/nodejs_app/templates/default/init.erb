@@ -57,7 +57,7 @@
 NAME="<%= node['nodejs_app']['appName'] %>"
 NODE_BIN_DIR="/usr/bin"
 NODE_PATH="/usr/lib/node_modules"
-APPLICATION_PATH="<%= node['nodejs_app']['destination'] %>"
+APPLICATION_PATH="<%= @destination %>"
 PIDFILE="<%= File.join('/home', node['nodejs_app']['username'], '.forever/pids', "#{node['nodejs_app']['appName']}.pid") %>"
 LOGFILE="<%= File.join('/home', node['nodejs_app']['username'], '.forever', "#{node['nodejs_app']['appName']}.log") %>"
 MIN_UPTIME="5000"

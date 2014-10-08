@@ -43,18 +43,14 @@ execute 'add forever to run app as daemon' do
   environment ({ 'HOME' => home_dir })
 end
 
-start_app_cmd = "forever start #{node['nodejs_app']['server_name']}"
-if node['nodejs_app']['http_port'].to_i <= 1024
-  start_app_cmd = 'sudo ' + start_app_cmd
+template '/etc/init.d/node-app' do
+  source 'init.erb'
+  owner 'root'
+  group 'root'
+  mode 0755
+  variables destination: "#{node['nodejs_app']['destination']}/current"
 end
 
-execute 'run app' do
-  cwd "#{node['nodejs_app']['destination']}/current"
-  command start_app_cmd
-  user node['nodejs_app']['username']
-  environment ({ 'HOME' => home_dir })
-  only_if { ::File.exist?(File.join(node['nodejs_app']['destination'],
-                                    'current',
-                                    node['nodejs_app']['server_name']))
-  }
+service 'node-app' do
+  action [:enable, :start]
 end
