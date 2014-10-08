@@ -16,11 +16,23 @@ databag = Chef::EncryptedDataBagItem.load(node['deployment']['app_id'],
                                           node['deployment']['id'])
 node.set['nodejs_app']['password'] = databag['nodejs_app']['password']
 node.set['nodejs_app']['deploy_key'] = databag['nodejs_app']['deploy_key']
+node.set['nodejs_app']['database_url'] = databag['nodejs_app']['database_url']
 
 app_user = node['nodejs_app']['username']
 app_dir = node['nodejs_app']['destination']
 home_dir = File.join('/home', app_user)
+secrets_dir = node['nodejs_app']['secrets_dir']
 forever_dir = File.join(home_dir, '.forever')
+
+directory secrets_dir do
+  mode 0750
+  recursive true
+end
+
+file File.join(secrets_dir, "#{node['nodejs_app']['appName']}_db_url.txt") do
+  mode 0660
+  content databag['nodejs_app']['database_url']
+end
 
 user app_user do
   password node['nodejs_app']['password']
@@ -36,7 +48,6 @@ end
     recursive true
   end
 end
-
 
 bash 'create Node directories' do
   user app_user

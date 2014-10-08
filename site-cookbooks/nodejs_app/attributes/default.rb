@@ -14,6 +14,7 @@ default['nodejs_app']['sslkey'] = nil
 default['nodejs_app']['sslcacert'] = nil
 # A comma separated string of packages
 default['nodejs_app']['packages'] = ''
+default['nodejs_app']['secrets_dir'] = '/etc/configs'
 
 include_attribute 'sudo::default'
 
