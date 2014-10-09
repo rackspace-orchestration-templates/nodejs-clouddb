@@ -197,7 +197,7 @@ resources:
           encrypted: true
           id: { get_param: stack_id }
           nodejs_app:
-            password: { get_param: nodejs_user_password }
+            password: { get_attr: [nodejs_user_password, value] }
             deploy_key: { get_param: deploy_key }
             database_url:
               str_replace:
