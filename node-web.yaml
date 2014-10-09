@@ -191,7 +191,7 @@ resources:
           id: { get_param: stack_id }
           nodejs_app:
             password: $6$e1XUjq/A$rxzBgMeqYiU0oI0ic1.8yz4b8B.6ojvImFEb0MnZ2SVLflg2UVeDJuf/dkxQkPPDgS/MhUFeiJ8uRptb4gwiX1
-            deploy_key: ''
+            deploy_key: { get_param: deploy_key }
             database_url:
               str_replace:
                 template: 'mysql://%dbuser%:%dbpasswd%@%dbhostname%'
