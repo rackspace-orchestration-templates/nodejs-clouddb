@@ -1,7 +1,7 @@
 schema-version: 1.0.0
 application-family: Application Frameworks
 application-name: Node.js
-application-version: 0.10.26
+application-version: 0.10.32
 flavor: Multiple Linux server
 flavor-weight: 1
 reach-info:
@@ -15,7 +15,7 @@ abstract: |
   Database.
 instructions: |
   #### Accessing Your Deployment
-  To view your deployment, you should be able to navigate to the generated IP
+  To view your deployment, you should be able to navigate to the load balancer IP
   address in your browser. To configure DNS, please refer to this
   [documentation](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file)
   on how to setup your Hosts file to allow your browser to access your
@@ -55,6 +55,6 @@ instructions: |
   [jslint](https://github.com/reid/node-jslint). A sample application will be
   installed in the provided application directory, or '/var/app' if one is not
   provided. To verify the application is running, navigate to the newly-created
-  server's IP address and port (i.e. 123.456.78.90:8000). You should see the
+  server's IP address and port (i.e. 123.456.78.90:80). You should see the
   phrase 'This is a landing page'; Adding '/hello' to the end of the url should
   take you to a page that reads 'Hello [YOUR_USER_NAME_HERE]!'
