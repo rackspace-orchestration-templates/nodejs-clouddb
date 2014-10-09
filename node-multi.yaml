@@ -39,19 +39,6 @@ parameters:
       description: |
         Must begin with a letter and contain only alphanumeric characters.
 
-  db_hostname:
-    label: Server Name
-    description: Server Name
-    type: string
-    default: nodejs-db
-    constraints:
-    - length:
-        min: 1
-        max: 64
-    - allowed_pattern: "^[a-zA-Z][a-zA-Z0-9-]*$"
-      description: |
-        Must begin with a letter and contain only alphanumeric characters.
-
   database_username:
     label: Database Username
     description: Database Username
