@@ -4,7 +4,7 @@ Description
 This is a template for deploying a NodeJS application from a git repo under on
 multiple Linux servers with [OpenStack
 Heat](https://wiki.openstack.org/wiki/Heat) on the [Rackspace
-Cloud](http://www.rackspace.com/cloud/). This template is leveraging
+Cloud](http://www.rackspace.com/cloud/). This template uses
 [chef-solo](http://docs.opscode.com/chef_solo.html) to set up the server.
 
 Requirements
@@ -84,7 +84,20 @@ can be done within a file using `%s/\\n/\r/g`.
 
 Stack Details
 =============
-By default the application will be deployed under /var/www/application
+By default the application will be deployed under `/var/www/application`.
+
+The database type, hostname, and credentials are available to the application
+in the environment variable `DATABASE_URL` which is formatted as follows:
+
+`{datastore type}://{username}:{password}@{database hostname}`
+
+An example:
+
+`mysql://nodejs:abcd1234@2f29b1c42021f207a3419f7cc322cde7a40a13b2.rackspaceclouddb.com`
+
+This is the URL format used by [Heroku](https://www.heroku.com). There are Nodejs modules
+which will parse these URLs for you, such as
+[`parse-database-url`](https://www.npmjs.org/package/parse-database-url).
 
 Testing
 =============
