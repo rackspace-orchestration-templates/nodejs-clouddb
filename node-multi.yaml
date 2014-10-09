@@ -311,7 +311,7 @@ outputs:
           "%ip%": { get_attr: [load_balancer, PublicIp] }
 
   database_server_ip:
-    description: Database Server IP
+    description: Database Server hostname
     value: { get_attr: [database_server, hostname] }
 
   mysql_root_password:
