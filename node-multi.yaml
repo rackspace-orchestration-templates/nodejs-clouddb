@@ -281,7 +281,7 @@ resources:
     properties:
       count: { get_param: nodejs_app_server_count }
       resource_def:
-        type: ./node-web.yaml
+        type: { get_param: child_template }
         properties:
           hostname: { get_param: server_hostnames }
           ssh_key_name: { get_resource: ssh_key }
