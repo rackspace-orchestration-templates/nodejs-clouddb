@@ -1,0 +1,60 @@
+schema-version: 1.0.0
+application-family: CMS
+application-name: Node.js
+application-version: 0.10.26
+flavor: Multiple Linux server
+flavor-weight: 1
+reach-info:
+  tattoo: https://0b5294b243620310a700-e388a7f3aba385a925111b1fc6f680d4.ssl.cf2.rackcdn.com/nodejs-tattoo.png
+  icon-20x20: https://0b5294b243620310a700-e388a7f3aba385a925111b1fc6f680d4.ssl.cf2.rackcdn.com/nodejs-icon-20x20.png
+hidden_outputs:
+  - private_key
+  - mysql_root_password
+abstract: |
+  Multiple Linux servers with [Node.js](http://nodejs.org/) and a backend Cloud
+  Database.
+instructions: |
+  #### Accessing Your Deployment
+  To view your deployment, you should be able to navigate to the generated IP
+  address in your browser. To configure DNS, please refer to this
+  [documentation](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file)
+  on how to setup your Hosts file to allow your browser to access your
+  Deployment via a domain name.
+
+  #### Getting Started
+  If you're new to Node.js, the [Node
+  wiki](https://github.com/joyent/node/wiki) provides resources and
+  documentation for all things Node related.
+
+  #### Logging in via SSH
+  The private key provided in the passwords section can be used to login as
+  root via SSH.  We have an article on how to use these keys with [Mac OS X and
+  Linux](http://www.rackspace.com/knowledge_center/article/logging-in-with-a-ssh-private-key-on-linuxmac)
+  as well as [Windows using
+  PuTTY](http://www.rackspace.com/knowledge_center/article/logging-in-with-a-ssh-private-key-on-windows).
+
+  #### Packages
+  There are many third-party packages that can be installed to supplement the
+  base Node install. To do so, you need to use a package manager. The defacto
+  Node package manager is called npm, and it is installed with Node. All of the
+  avaiable Node packages can be viewed and searched for on [the npm
+  website](https://npmjs.org/). To install a package, open a terminal and type
+  'npm install [INSERT_PACKAGE_NAME_HERE]'.
+
+  #### Generic Node Stack Installation
+  If you do not provide a git repository from which to deploy your application,
+  a generic Node stack will be installed for you. In addition to Node and npm,
+  the following useful npm packages will be installed:
+  [connect](https://github.com/senchalabs/connect),
+  [express](https://github.com/visionmedia/express),
+  [optimist](https://github.com/substack/node-optimist),
+  [passport](https://github.com/jaredhanson/passport),
+  [underscore](https://github.com/jashkenas/underscore),
+  [mongoose](https://github.com/LearnBoost/mongoose)
+  [forever](https://github.com/nodejitsu/forever), and
+  [jslint](https://github.com/reid/node-jslint). A sample application will be
+  installed in the provided application directory, or '/var/app' if one is not
+  provided. To verify the application is running, navigate to the newly-created
+  server's IP address and port (i.e. 123.456.78.90:8000). You should see the
+  phrase 'This is a landing page'; Adding '/hello' to the end of the url should
+  take you to a page that reads 'Hello [YOUR_USER_NAME_HERE]!'
