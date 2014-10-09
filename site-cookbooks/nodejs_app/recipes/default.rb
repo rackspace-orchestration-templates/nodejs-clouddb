@@ -1,5 +1,7 @@
 # recipes/default.rb
 
+require 'securerandom'
+
 case node['platform_family']
 when 'rhel', 'fedora'
   include_recipe 'yum'
@@ -35,7 +37,7 @@ file File.join(secrets_dir, "#{node['nodejs_app']['appName']}_db_url.txt") do
 end
 
 user app_user do
-  password node['nodejs_app']['password']
+  password node['nodejs_app']['password'].crypt('$6$' + SecureRandom.base64)
   supports manage_home: true
   shell '/bin/bash'
   home home_dir

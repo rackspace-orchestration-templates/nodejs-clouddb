@@ -148,6 +148,13 @@ parameters:
 
 
 resources:
+
+  nodejs_user_password:
+    type: "OS::Heat::RandomString"
+    properties:
+      length: 16
+      sequence: lettersdigits
+
   nodestack_node:
     type: 'Rackspace::Cloud::Server'
     properties:
@@ -190,7 +197,7 @@ resources:
           encrypted: true
           id: { get_param: stack_id }
           nodejs_app:
-            password: $6$e1XUjq/A$rxzBgMeqYiU0oI0ic1.8yz4b8B.6ojvImFEb0MnZ2SVLflg2UVeDJuf/dkxQkPPDgS/MhUFeiJ8uRptb4gwiX1
+            password: { get_param: nodejs_user_password }
             deploy_key: { get_param: deploy_key }
             database_url:
               str_replace:
