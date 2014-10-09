@@ -35,6 +35,10 @@ the `-P` flag to specify a custom parameter.
 * `db_flavor`: Required: Rackspace Cloud Server flavor to use. The size is
   based on the amount of RAM for the provisioned server. (Default: 4 GB
   Performance)
+* `db_size`: Required: Amount of storage required for your Rackspace Cloud Database,
+in GB. (Default: 10)
+* `datastore_version`: Required: Version of MySQL to run on the Cloud Databases
+instance. (Default: 5.6)
 * `image`: Required: Server image used for all servers that are created as a
   part of this deployment. (Default: Ubuntu 12.04 LTS (Precise Pangolin))
 * `load_balancer_hostname`: Hostname for the Cloud Load Balancer (Default:
