@@ -192,16 +192,21 @@ parameters:
     type: string
 
   kitchen:
+    label: Kitchen URL
     description: URL for the kitchen to use
     type: string
     default: https://github.com/rackspace-orchestration-templates/nodejs-clouddb
 
   chef_version:
+    label: Chef Version
     description: Version of chef client to use
     type: string
     default: 11.16.0
 
   child_template:
+    label: Child Template
+    description: |
+      Location of the child template to use for the Node.js web servers
     type: string
     default: https://raw.github.com/rackspace-orchestration-templates/nodejs-clouddb/master/node-web.yaml
 
