@@ -91,7 +91,7 @@ parameters:
 
   child_template:
     type: string
-    default: https://raw.github.com/brint/nodejs-multi/master/node-web.yaml
+    default: https://raw.githubusercontent.com/rackspace-orchestration-templates/nodejs-clouddb/master/node-web.yaml
 
   revision:
     label: Revision
