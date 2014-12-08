@@ -208,7 +208,7 @@ parameters:
     description: |
       Location of the child template to use for the Node.js web servers
     type: string
-    default: https://raw.github.com/rackspace-orchestration-templates/nodejs-clouddb/master/node-web.yaml
+    default: https://raw.githubusercontent.com/rackspace-orchestration-templates/nodejs-clouddb/master/node-web.yaml
 
 resources:
   ssh_key:
