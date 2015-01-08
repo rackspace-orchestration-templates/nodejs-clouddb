@@ -72,7 +72,6 @@ parameters:
   ssh_key_name:
     description: Nova keypair name for ssh access to the server
     type: string
-    default: nodejs-app
 
   ssh_private_key:
     description: Private SSH key
