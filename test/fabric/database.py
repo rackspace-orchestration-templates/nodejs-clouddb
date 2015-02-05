@@ -1,5 +1,6 @@
 from fabric.api import env, task
 from envassert import detect, file, package, port, process, service
+from hot.utils.test import get_artifacts, http_check
 
 
 @task
@@ -17,3 +18,9 @@ def mysql():
     assert file.exists(root_my_cnf)
     assert file.mode_is(root_my_cnf, 600)
     assert file.owner_is(root_my_cnf, "root")
+
+
+@task
+def artifacts():
+    env.platform_family = detect.detect()
+    get_artifacts()
