@@ -2,6 +2,7 @@ import re
 from fabric.api import env, run, hide, task
 from envassert import detect, file, group, package, port, process, service, \
     user, text
+from hot.utils.test import get_artifacts, http_check
 
 
 def nodejs_is_responding():
@@ -43,3 +44,9 @@ def check():
         "node-app service is not enabled"
 
     assert nodejs_is_responding(), "node demo app did not respond as expected"
+
+
+@task
+def artifacts():
+    env.platform_family = detect.detect()
+    get_artifacts()
