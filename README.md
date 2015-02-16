@@ -86,6 +86,10 @@ Stack Details
 =============
 By default the application will be deployed under `/var/www/application`.
 
+forever is used to keep the node.js application running. Be sure the entry
+point for your application is provided in its `package.json` file in the `main`
+key.
+
 The database type, hostname, and credentials are available to the application
 in the environment variable `DATABASE_URL` which is formatted as follows:
 
