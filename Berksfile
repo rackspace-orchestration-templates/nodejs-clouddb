@@ -4,8 +4,8 @@ cookbook 'apt'
 cookbook 'mysql'
 cookbook 'nodejs'
 cookbook 'hollandbackup',
-  :git => 'https://github.com/brint/hollandbackup'
+  :git => 'https://github.com/heat-cookbooks/hollandbackup'
 cookbook 'rax-firewall',
-  :git => 'https://github.com/brint/rax-firewall-cookbook'
+  :git => 'https://github.com/heat-cookbooks/rax-firewall-cookbook'
 cookbook 'nodejs_app',
   :path => 'site-cookbooks/nodejs_app'
