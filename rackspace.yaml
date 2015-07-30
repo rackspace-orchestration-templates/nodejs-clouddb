@@ -11,8 +11,8 @@ hidden_outputs:
   - private_key
   - mysql_root_password
 abstract: |
-  Multiple Linux servers with [Node.js](http://nodejs.org/) and a backend Cloud
-  Database.
+  Node.js is an open-source, cross-platform runtime environment for server-side
+  JavaScript applications.
 instructions: |
   #### Accessing Your Deployment
   To view your deployment, you should be able to navigate to the load balancer IP
