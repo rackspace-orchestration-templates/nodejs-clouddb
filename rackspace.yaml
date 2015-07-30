@@ -58,3 +58,6 @@ instructions: |
   server's IP address and port (i.e. 123.456.78.90:80). You should see the
   phrase 'This is a landing page'; Adding '/hello' to the end of the url should
   take you to a page that reads 'Hello [YOUR_USER_NAME_HERE]!'
+description: |
+  Multiple Linux servers with [Node.js 0.10.26](https://nodejs.org/) and a
+  backend Cloud Database.
