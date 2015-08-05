@@ -1,7 +1,8 @@
 heat_template_version: 2013-05-23
 
 description: |
-  Heat template to deploy a multi-server Node.js deployment
+  Multiple Linux servers with [Node.js 0.10.26](https://nodejs.org/) and a
+  backend Cloud Database.
 
 parameter_groups:
 - label: Server Settings
